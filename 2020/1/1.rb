@@ -19,7 +19,6 @@ def checkPairs(numbers)
     a = 0
     b = 0
     c = 0
-    count = 0
 
     until a == numbers.length - 1 do
         until b == numbers.length - 1 do
@@ -28,7 +27,6 @@ def checkPairs(numbers)
                     return numbers[a] * numbers[b] * numbers[c] 
                 end
                 c+=1
-            puts count +=1
             end
             b+=1
             c = 0
