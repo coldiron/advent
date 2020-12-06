@@ -1,13 +1,13 @@
 class AdventDay3a
     TREE = '#'
 
-    attr_reader :treesHit, :to_s
+    attr_reader :trees_hit, :to_s
 
     def initialize(rise, run)
         @rise = rise      # Rise component of slope
         @run = run        # Run component of slope
-        @rows = getRows   # Rows of trees
-        @treesHit = 0     # Counter of trees hit while tobogganing along slope
+        @rows = get_rows   # Rows of trees
+        @trees_hit = 0     # Counter of trees hit while tobogganing along slope
         @to_s = ""
 
         self.toboggan!
@@ -24,8 +24,8 @@ class AdventDay3a
                 i -= (row.length)
             end
 
-            if isTree?(row[i])
-                @treesHit += 1
+            if is_tree?(row[i])
+                @trees_hit += 1
                 rowWithCursor[i] = "X"
             else
                 rowWithCursor[i] = "O"
@@ -35,14 +35,14 @@ class AdventDay3a
 
             i += @run
         end
-        @to_s += "Rise: #{@rise}, Run: #{@run}, Trees hit: #{@treesHit}"
+        @to_s += "Rise: #{@rise}, Run: #{@run}, Trees hit: #{@trees_hit}"
     end
 
-    def isTree?(j)
+    def is_tree?(j)
         j == TREE
     end
 
-    def getRows
+    def get_rows
         file = File.open("input")
         rows = file.read.split("\n")
         file.close

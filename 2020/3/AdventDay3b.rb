@@ -1,13 +1,13 @@
-class AdventDay3a
+class AdventDay3b
     TREE = '#'
 
-    attr_reader :treesHit, :to_s
+    attr_reader :trees_hit, :to_s
 
     def initialize(rise, run)
         @rise = rise
         @run = run
-        @rows = getRows
-        @treesHit = 0
+        @rows = get_rows
+        @trees_hit = 0
         @to_s = ""
 
         self.toboggan!
@@ -20,33 +20,33 @@ class AdventDay3a
 
         @rows.each do |row|
             if j % @rise == 0
-                rowWithCursor = row.dup
+                row_with_cursor = row.dup
 
                 if i >= row.length - 1
                     i -= (row.length)
                 end
 
-                if isTree?(row[i])
-                    @treesHit += 1
-                    rowWithCursor[i] = "X"
+                if is_tree?(row[i])
+                    @trees_hit += 1
+                    row_with_cursor[i] = "X"
                 else
-                    rowWithCursor[i] = "O"
+                    row_with_cursor[i] = "O"
                 end
 
-                @to_s += "#{row} #{rowWithCursor}\n"
+                @to_s += "#{row} #{row_with_cursor}\n"
 
                 i += @run
             end
             j += 1
         end
-        @to_s += "Rise: #{@rise}, Run: #{@run}, Trees hit: #{@treesHit}"
+        @to_s += "Rise: #{@rise}, Run: #{@run}, Trees hit: #{@trees_hit}"
     end
 
-    def isTree?(j)
+    def is_tree?(j)
         j == TREE
     end
 
-    def getRows
+    def get_rows
         file = File.open("input")
         rows = file.read.split("\n")
         file.close
@@ -54,12 +54,12 @@ class AdventDay3a
     end
 end
 
-route1 = AdventDay3a.new(-1, 1) 
-route2 = AdventDay3a.new(-1, 3) 
-route3 = AdventDay3a.new(-1, 5) 
-route4 = AdventDay3a.new(-1, 7) 
-route5 = AdventDay3a.new(-2, 1) 
+route1 = AdventDay3b.new(-1, 1) 
+route2 = AdventDay3b.new(-1, 3) 
+route3 = AdventDay3b.new(-1, 5) 
+route4 = AdventDay3b.new(-1, 7) 
+route5 = AdventDay3b.new(-2, 1) 
 
-treesProduct = (route1.treesHit * route2.treesHit * route3.treesHit * route4.treesHit * route5.treesHit)
+trees_product = (route1.trees_hit * route2.trees_hit * route3.trees_hit * route4.trees_hit * route5.trees_hit)
 
-puts treesProduct
+puts trees_product
