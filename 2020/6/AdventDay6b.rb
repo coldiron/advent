@@ -6,7 +6,7 @@ class CustomsGroup
   end
 
   def shared_answers_count
-    answered_yes = Hash.new
+    answered_yes = {}
 
     @members.each do |member|
       member.split('').each do |answer|
@@ -18,7 +18,7 @@ class CustomsGroup
       end
     end
 
-    answered_yes.keep_if { |_,  value| value == @members.length }
+    answered_yes.keep_if { |_, value| value == @members.length }
 
     answered_yes.length
   end
