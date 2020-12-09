@@ -25,8 +25,8 @@ class Passport
   private
 
   def validate
-    REQUIRED_FIELDS.each do |r|
-      @valid = false unless @fields.key?(r)
+    REQUIRED_FIELDS.each do |field|
+      @valid = false unless @fields.key?(field)
     end
 
     if @valid
@@ -50,11 +50,9 @@ class Passport
 
   def validate_hgt
     validated = false
-
     hgt = @fields[:hgt].dup
     units = hgt[/\D\D/]
     value = hgt[/\d*/].to_i
-
     validated = value.between?(59, 76) if units == 'in'
     validated = value.between?(150, 193) if units == 'cm'
     validated
@@ -90,15 +88,14 @@ class PassportCollection
     file = File.open(filename)
     rows = file.read.split("\n\n")
     file.close
-    rows.each do |r|
-      @passports << add_passport(r)
+    rows.each do |row|
+    add_passport(row)
     end
   end
 
   private
-
   def add_passport(entry)
-    Passport.new(Hash[
+    @passports << Passport.new(Hash[
         entry.split(' ').map do |pair|
           key, value = pair.strip.split(':', 2)
           [key.to_sym, value]

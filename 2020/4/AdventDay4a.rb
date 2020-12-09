@@ -9,9 +9,8 @@ class Passport
     pid
   ].freeze
 
-  @valid = true
-
   def initialize(fields)
+    @valid = true
     @fields = fields
     validate
   end
@@ -23,9 +22,8 @@ class Passport
   private
 
   def validate
-    @valid = true
-    REQUIRED_FIELDS.each do |r|
-      @valid = false unless @fields.key?(r)
+    REQUIRED_FIELDS.each do |field|
+      @valid = false unless @fields.key?(field)
     end
   end
 end
@@ -46,13 +44,13 @@ class PassportCollection
     file = File.open('input')
     rows = file.read.split("\n\n")
     file.close
-    rows.each do |r|
-      @passports << add_passport(r)
+    rows.each do |row|
+      add_passport(row)
     end
   end
 
   def add_passport(entry)
-    Passport.new(Hash[
+    @passports << Passport.new(Hash[
         entry.split(' ').map do |pair|
           key, value = pair.strip.split(':', 2)
           [key.to_sym, value]
