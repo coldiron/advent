@@ -1,5 +1,4 @@
-
-# def checkPairs(numbers, firstPos, secondPos) 
+# def checkPairs(numbers, firstPos, secondPos)
 #     if((numbers[firstPos].to_i + numbers[secondPos].to_i) == 2020)
 #         numbers[firstPos] * numbers[secondPos]
 #     else
@@ -11,38 +10,33 @@
 #     end
 # end
 
-def correct(a, b, c) 
-    a + b + c == 2020
+def correct(a, b, c)
+  a + b + c == 2020
 end
 
 def checkPairs(numbers)
-    a = 0
+  a = 0
+  b = 0
+  c = 0
+
+  until a == numbers.length - 1
+    until b == numbers.length - 1
+      until c == numbers.length - 1
+        return numbers[a] * numbers[b] * numbers[c] if correct(numbers[a], numbers[b], numbers[c])
+        c += 1
+      end
+      b += 1
+      c = 0
+    end
+    a += 1
     b = 0
     c = 0
-
-    until a == numbers.length - 1 do
-        until b == numbers.length - 1 do
-            until c == numbers.length - 1 do
-                if correct(numbers[a], numbers[b], numbers[c])
-                    return numbers[a] * numbers[b] * numbers[c] 
-                end
-                c+=1
-            end
-            b+=1
-            c = 0
-        end
-        a += 1
-        b = 0
-        c = 0
-    end
+  end
 end
 
-file = File.open("input")
-
+file = File.open('input')
 numbers = file.read.split
-
 numbers = numbers.map(&:to_i)
-
 file.close
 
 puts checkPairs(numbers)
