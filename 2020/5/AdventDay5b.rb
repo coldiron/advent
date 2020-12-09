@@ -95,10 +95,14 @@ class AirplaneSeats
     to_s
   end
 
-  def max_id
+  def ids
     @seats.map do |seat|
       seat.id
-    end.max
+    end.sort
+  end
+
+  def missing
+    (ids.min..ids.max).to_a - ids
   end
 
   private
@@ -108,15 +112,13 @@ class AirplaneSeats
     seats = file.read.split("\n")
     file.close
     seats.each do |seat|
-      @seats << add_seat(seat)
+      @seats << AirplaneSeat.new(seat)
     end
   end
 
-  def add_seat(seat)
-    AirplaneSeat.new(seat)
-  end
 end
 
 seats = AirplaneSeats.new
 seats.from_file('input')
-puts seats.max_id.to_s
+
+puts seats.missing
