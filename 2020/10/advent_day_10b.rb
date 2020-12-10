@@ -9,7 +9,7 @@ class Chargers
 
   def from_file(filename)
     file = File.open(filename)
-    @chargers = file.read.split("\n").each do |joltage|
+    file.read.split("\n").each do |joltage|
       add_charger(joltage)
     end
     file.close
