@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class XmasString
   def initialize(letters, rules)
     @letters = letters
@@ -40,7 +42,7 @@ class XmasString
   def no_banned_strings
     banned = false
     %w[ab cd pq xy].each do |banned_string|
-      banned = @letters.include? banned_string unless banned
+      banned ||= @letters.include? banned_string
     end
     !banned
   end
@@ -57,6 +59,7 @@ class XmasStrings
   def nice_count
     @strings.select(&:nice?).count
   end
+
   def from_file(filename)
     file = File.open(filename)
     file.read.split("\n").each do |line|

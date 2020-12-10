@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomsGroup
   attr_reader :answers
 
@@ -20,9 +22,7 @@ class CustomsGroups
   end
 
   def sum_unique_answers
-    @groups.map do |group|
-      group.unique_answers
-    end.sum
+    @groups.map(&:unique_answers).sum
   end
 
   private

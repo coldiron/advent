@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Passport
   REQUIRED_FIELDS = %i[
     byr

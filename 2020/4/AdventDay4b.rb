@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Passport
   REQUIRED_FIELDS = %i[
     byr
@@ -89,11 +91,12 @@ class PassportCollection
     rows = file.read.split("\n\n")
     file.close
     rows.each do |row|
-    add_passport(row)
+      add_passport(row)
     end
   end
 
   private
+
   def add_passport(entry)
     @passports << Passport.new(Hash[
         entry.split(' ').map do |pair|

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AdventDay3b
-  TREE = '#'.freeze
+  TREE = '#'
 
   attr_reader :trees_hit, :to_s
 
@@ -20,7 +22,7 @@ class AdventDay3b
     j = 0
 
     @rows.each do |row|
-      if j % @rise == 0
+      if (j % @rise).zero?
         row_with_cursor = row.dup
 
         i -= row.length if i >= row.length - 1

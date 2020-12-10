@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BagContents
   attr_reader :contents
 
@@ -7,14 +9,14 @@ class BagContents
   end
 
   def contains?(type)
-    @contents.has_key?(type)
+    @contents.key?(type)
   end
 
   private
 
   def parse_rule
     contents_hash = {}
-    contents_array = @contents.gsub('.', '').gsub('bags', '').gsub('bag', '').gsub('no', '0').split(',').each { |s| s.strip! }
+    contents_array = @contents.gsub('.', '').gsub('bags', '').gsub('bag', '').gsub('no', '0').split(',').each(&:strip!)
 
     contents_hash = contents_array.to_h do |contents|
       [contents.gsub(/\d*/, '').strip, contents[/\d*/]]

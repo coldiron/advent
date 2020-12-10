@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class AdventDay3a
-  TREE = '#'.freeze
+  TREE = '#'
 
   attr_reader :trees_hit, :to_s
 
   def initialize(rise, run)
-    @rise = rise      # Rise component of slope
+    @rise = rise # Rise component of slope
     @run = run # Run component of slope
     @rows = get_rows   # Rows of trees
     @trees_hit = 0     # Counter of trees hit while tobogganing along slope

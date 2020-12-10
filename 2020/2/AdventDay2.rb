@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdventDay2
   def initialize
     puts count
@@ -7,7 +9,6 @@ class AdventDay2
 
   def count
     count = 0
-    count2 = 0
     rows = get_rows
     rows.each do |row|
       count += 1 if is_valid?(row)
@@ -26,7 +27,7 @@ class AdventDay2
     char_count >= min && max >= char_count
   end
 
-  def getRows
+  def get_rows
     file = File.open('input')
     rows = file.read.split("\n")
     file.close

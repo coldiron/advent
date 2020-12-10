@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomsGroup
   attr_reader :answers
 
@@ -34,9 +36,7 @@ class CustomsGroups
   end
 
   def sum_shared_answers
-    @groups.map do |group|
-      group.shared_answers_count
-    end.sum
+    @groups.map(&:shared_answers_count).sum
   end
 
   private

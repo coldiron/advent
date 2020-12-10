@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameConsole
   def initialize
     @instructions = []
@@ -31,21 +33,21 @@ class GameConsole
   def fix_instructions
     count = 0
     @instructions.each do |instruction|
-      if instruction.start_with?('nop') && @program_broken
-        instruction.gsub!('nop', 'jmp')
-        execute_program
-        instruction.gsub!('jmp', 'nop') if @program_broken
-        count += 1
-      end
+      next unless instruction.start_with?('nop') && @program_broken
+
+      instruction.gsub!('nop', 'jmp')
+      execute_program
+      instruction.gsub!('jmp', 'nop') if @program_broken
+      count += 1
     end
     if @program_broken
       @instructions.each do |instruction|
-        if instruction.start_with?('jmp') && @program_broken
-          instruction.gsub!('jmp', 'nop')
-          execute_program
-          instruction.gsub!('nop', 'jmp') if @program_broken
-          count += 1
-        end
+        next unless instruction.start_with?('jmp') && @program_broken
+
+        instruction.gsub!('jmp', 'nop')
+        execute_program
+        instruction.gsub!('nop', 'jmp') if @program_broken
+        count += 1
       end
     end
   end

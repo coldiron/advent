@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class XmasStream
   attr_reader :first_invalid_entry
 
@@ -51,9 +53,7 @@ class XmasStream
 
   def get_data(filename)
     file = File.open(filename)
-    @numbers = file.read.split("\n").map do |number|
-      number.to_i
-    end
+    @numbers = file.read.split("\n").map(&:to_i)
     file.close
   end
 end

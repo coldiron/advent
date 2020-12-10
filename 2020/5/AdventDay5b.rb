@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AirplaneSeat
   attr_reader :id, :to_s
 
@@ -8,7 +10,7 @@ class AirplaneSeat
     initialize_seats
     parse_spec
     create_id
-    @to_s = "Seat \##{@id} - #{@spec} - Row: #{row}, Col: #{col}" 
+    @to_s = "Seat \##{@id} - #{@spec} - Row: #{row}, Col: #{col}"
   end
 
   def to_str
@@ -84,9 +86,9 @@ class AirplaneSeats
   end
 
   def to_s
-    output = ""
+    output = ''
     @seats.each do |seat|
-      output += seat.to_s + "\n"
+      output += "#{seat}\n"
     end
     output
   end
@@ -96,9 +98,7 @@ class AirplaneSeats
   end
 
   def ids
-    @seats.map do |seat|
-      seat.id
-    end.sort
+    @seats.map(&:id).sort
   end
 
   def missing
@@ -115,7 +115,6 @@ class AirplaneSeats
       @seats << AirplaneSeat.new(seat)
     end
   end
-
 end
 
 seats = AirplaneSeats.new
