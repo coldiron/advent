@@ -12,9 +12,7 @@ class Chargers
   end
 
   def from_file(filename)
-    file = File.open(filename)
-    @chargers = file.read.split("\n").map(&:to_i)
-    file.close
+    @chargers = File.readlines(filename, chomp: true).map(&:to_i)
     @chargers.append(0) # add airplane's outlet
     @chargers.sort!
     @chargers.append(@chargers.max + 3) # add device's built-in charger
