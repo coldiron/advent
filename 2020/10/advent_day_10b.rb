@@ -13,9 +13,7 @@ class Chargers
 
   def from_file(filename)
     file = File.open(filename)
-    file.read.split("\n").each do |joltage|
-      @chargers.append(joltage.to_i)
-    end
+    @chargers = file.read.split("\n").map(&:to_i)
     file.close
     @chargers.append(0) # add airplane's outlet
     @chargers.sort!
