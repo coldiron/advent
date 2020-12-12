@@ -1,7 +1,6 @@
 class Ship
   def initialize(orders = [])
     @orders = orders
-    @heading = 90
     @position = { x: 0, y: 0 }
     @waypoint = { x: 10, y: 1 }
   end
