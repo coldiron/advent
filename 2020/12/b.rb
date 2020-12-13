@@ -39,13 +39,13 @@ class Ship
 
   def L(degrees)
     (degrees / 90).times do
-      @waypoint = { x: (0 - @waypoint[:y]), y: @waypoint[:x]}
+      @waypoint = { x: (0 - @waypoint[:y]), y: @waypoint[:x] }
     end
   end
 
   def R(degrees)
     (degrees / 90).times do
-      @waypoint = { x: @waypoint[:y], y: (0 - @waypoint[:x])}
+      @waypoint = { x: @waypoint[:y], y: (0 - @waypoint[:x]) }
     end
   end
 
