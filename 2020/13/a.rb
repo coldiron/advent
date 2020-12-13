@@ -35,7 +35,9 @@ class BusSchedule
       if @earliest_departure == 0
         @earliest_departure = line.to_i
       else
-        line.split(',').each { |entry| @buses.append(entry.to_i) unless entry == 'x' }
+        line.split(',').each do |entry| 
+          @buses.append(entry.to_i) unless entry == 'x'
+        end
       end
     end
   end
