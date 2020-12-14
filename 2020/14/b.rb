@@ -10,9 +10,9 @@ class FerryComputer
       if instruction.start_with? 'mask'
         @bitmask = instruction.split[2].chars
       else
-        addresses = address_combinations(
-          thirty_six_bit(instruction.split[0])
-        ).map! { |address| address.to_i(2) }
+        addresses = address_combinations(thirty_six_bit(instruction.split[0]))
+                    .map! { |address| address.to_i(2) }
+
         addresses.each do |address|
           @mem[address.to_i] = instruction.split[2].to_i
         end
@@ -32,10 +32,10 @@ class FerryComputer
 
   def thirty_six_bit(value)
     value.scan(/\d*/)
-      .join
-      .to_i
-      .to_s(2)
-      .rjust(36, '0')
+         .join
+         .to_i
+         .to_s(2)
+         .rjust(36, '0')
   end
 
   def partially_masked(address)
@@ -48,37 +48,28 @@ class FerryComputer
   end
 
   def address_combinations(address)
-    partial_address = partially_masked(address).chars
     addresses = []
-    bits_list = bit_combinations(@bitmask.count('X'))
+    address = partially_masked(address)
+    bits_list = %w[0 1].repeated_permutation(address.count('X')).to_a
 
     bits_list.each do |bits|
-      current_address = ''
-      bits = bits.chars
-      x_index = 0
-      partial_address.each do |bit|
-        if bit == 'X'
-          current_address += bits[x_index]
-          x_index += 1
-        else
-          current_address += bit
-        end
-      end
-      addresses.append(current_address)
+      addresses.append(floating_bitmasked_address(address, bits))
     end
     addresses
   end
 
-  def bit_combinations(bits)
-    combinations = []
-    (2**bits).times do |number|
-      combinations.append(
-        number
-        .to_s(2)
-        .rjust(bits, '0')
-      )
+  def floating_bitmasked_address(address, bits)
+    current_address = ''
+    x_index = 0
+    address.chars.each do |current_bit|
+      if current_bit == 'X'
+        current_address += bits[x_index]
+        x_index += 1
+      else
+        current_address += current_bit
+      end
     end
-    combinations
+    current_address
   end
 end
 
@@ -86,6 +77,6 @@ computer = FerryComputer.new
 
 computer.load_from_file('input')
 
-computer.run
+computer.run 
 
 puts computer.sum_memory
