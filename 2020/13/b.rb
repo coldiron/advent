@@ -15,7 +15,6 @@ class BusSchedule
 
   def calculate_recursive(time = 0, interval = 1, index = 0)
     return time if @buses[index].nil?
-
     bus, offset = @buses[index]
     time = calculate_recursive(time + interval, interval, index) unless (time + offset) % bus == 0
     time = calculate_recursive(time, interval * bus, index + 1)
@@ -30,14 +29,14 @@ class BusSchedule
   end
 end
 
-require 'benchmark'
+require 'benchmark' 
 
 buses = BusSchedule.new
 
 buses.load_from_file('input')
 
-reg_time = Benchmark.measure { 10_000.times { buses.calculate } }
-rec_time = Benchmark.measure { 10_000.times { buses.calculate_recursive } }
+reg_time = Benchmark.measure { 10000.times { buses.calculate } }
+rec_time = Benchmark.measure { 10000.times { buses.calculate_recursive } }
 puts "Reg: #{reg_time}Rec: #{rec_time}"
 
 puts buses.calculate_recursive

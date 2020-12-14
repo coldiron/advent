@@ -1,4 +1,4 @@
-class FerryDocker
+class FerryComputer
   def initialize(program = [])
     @program = program
     @mem = {}
@@ -34,10 +34,10 @@ class FerryDocker
   end
 end
 
-docker = FerryDocker.new
+computer = FerryComputer.new
 
-docker.load_from_file('input')
+computer.load_from_file('input')
 
-docker.run
+computer.run
 
-puts docker.sum_memory
+puts computer.sum_memory
