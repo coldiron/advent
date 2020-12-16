@@ -23,11 +23,8 @@ class ElfMemoryGame
   def play_a_round
     @turn += 1
     this_number = 0
-
     this_number = turn_difference unless last_number_is_new?
-
     update_turns(this_number)
-
     @last_number = this_number
   end
 
